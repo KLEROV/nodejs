@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+		<!--<link rel="stylesheet" href="assets/css/amazeui.min.css" />-->
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
+		<title>echarts</title>
+	</head>
+	<style>
+		body,
+		html {
+			/*background: #3a4144;*/
+			padding: 0;
+			margin: 0;
+		}
+		
+		.echart {
+			min-width: 740px;
+			overflow: hidden;
+		}
+		
+		.echart button {
+			border: none;
+			width: 70px;
+			padding: 5px 0;
+			background: #0e90d2;
+			color: white;
+		}
+		
+		.dataChoose ul,
+		.dataChoose,
+		.dataChoose ul li,
+		.selectItem,
+		.selectItem li {
+			padding: 0;
+			margin: 0;
+			font-size: 12px;
+			list-style: none;
+		}
+		
+		.dataChoose input {
+			padding: 8px 20px 8px 10px;
+			width: 140px;
+			border: none;
+		}
+		
+		.dataChoose ul li {
+			background: white;
+			padding: 10px;
+			border-bottom: 1px solid #EAEAEA;
+			color: black;
+			width: 140px;
+		}
+		
+		.dataChoose ul li.selected {
+			background: rgb(243, 243, 243);
+		}
+		
+		.dataChoose .jiantou {
+			background: url(backstage/img/allbgs.png) no-repeat 0px -23px;
+			background-size: 192px;
+		}
+		
+		.dataChoose .jiantou:hover,
+		.dataChoose ul li:hover {
+			cursor: pointer;
+		}
+		
+		.dataChoose ul li:hover {
+			background: #e6e6e6;
+		}
+		
+		.dataChoose .icon1 {
+			width: 16px;
+			height: 18px;
+			margin-right: 5px;
+			display: block;
+			position: absolute;
+			top: 5px;
+			left: 115px;
+			-webkit-transform: rotate(180deg);
+			-ms-transform: rotate(180deg);
+			-moz-transform: rotate(180deg);
+			-o-transform: rotate(180deg);
+			transform: rotate(180deg);
+		}
+		
+		.dataChoose ul {
+			display: none;
+			position: absolute;
+			top: 32px;
+			left: 0;
+			z-index: 44444444;
+		}
+		
+		.dataChoose ul.active {
+			display: block;
+		}
+		
+		li.dataChoose {
+			float: left;
+			margin: 0 20px 0 0;
+		}
+		
+		.main {
+			float: left;
+			width: 75%;
+			height: 600px;
+		}
+		
+		#main {
+			width: 100%;
+			height: 550px;
+			background: #F3F3F3;
+		}
+		
+		.new {
+			overflow: hidden;
+			float: right;
+		}
+		
+		.new div {
+			color: white;
+			background: #785799;
+		}
+		
+		.new>div {
+			width: 100%;
+			/*float: left;*/
+			padding: 18px 15px;
+			margin-bottom: 30px;
+			/*margin: 0 0.5%;*/
+		}
+		
+		.new .widget-statistic-value {
+			position: relative;
+			z-index: 35;
+			font-weight: 300;
+			display: block;
+			/*color: #fff;*/
+			font-size: 46px;
+			line-height: 46px;
+			margin-bottom: 8px;
+		}
+	</style>
+
+	<body>
+		<div class="echart">
+			<div class="main">
+				<p style="color: white;font-size: 20px;">统计记录</p>
+				<div id="main"></div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script>
+	var myChart = echarts.init(document.getElementById('main'));
+	option = {
+//		title: {
+//			x: 'center',
+//			text: 'ECharts例子个数统计'
+//		},
+		tooltip: {
+			trigger: 'item'
+		},
+		legend: {
+			selectedMode: false,
+			orient: 'vertical',
+			data: ['消费贷', '现金贷', '教育贷'],
+		},
+//		color: ['#C1232B', '#B5C334', '#FCCE10'],
+		toolbox: {
+			show: true,
+			feature: {
+				dataView: {
+					show: true,
+					readOnly: false
+				},
+				restore: {
+					show: true
+				},
+				saveAsImage: {
+					show: true
+				}
+			}
+		},
+		calculable: true,
+		grid: {
+			borderWidth: 0,
+			y: 80,
+			y2: 60
+		},
+		xAxis: [{
+			type: 'category',
+			show: false,
+			data: ['消费贷', '现金贷', '教育贷']
+		}],
+		yAxis: [{
+			type: 'value',
+			show: false
+		}],
+		series: [{
+			name: '消费贷',
+			type: 'bar',
+			barWidth: 40,
+			itemStyle: {
+				normal: {
+//					color: function(params) { // build a color map as your need. 
+//						var colorList = ['#C1232B', '#B5C334', '#FCCE10', '#E87C25', '#27727B', '#FE8463', '#9BCA63', '#FAD860', '#F3A43B', '#60C0DD', '#D7504B', '#C6E579', '#F4E001', '#F0805A', '#26C0C0'];
+//						return colorList[params.dataIndex]
+//					},
+					label: {
+						show: true,
+						position: 'top',
+						formatter: '{b}\n{c}'
+					}
+				}
+			},
+			data: [12, null, null],
+			markPoint: {
+				tooltip: {
+					trigger: 'item',
+					backgroundColor: 'black'
+				},
+				data: [{
+					xAxis: 0,
+					y: 350,
+					name: 'Line',
+					symbolSize: 20,
+					symbol: 'none'
+				}, {
+					xAxis: 1,
+					y: 350,
+					name: 'Bar',
+					symbolSize: 20,
+					symbol: 'none'
+				}, {
+					xAxis: 2,
+					y: 350,
+					name: 'Scatter',
+					symbolSize: 20,
+					symbol: 'none'
+				}]
+			}
+		}, {
+			name: '现金贷',
+			type: 'bar',
+			barWidth: 40,
+			itemStyle: {
+				normal: {
+//					color: function(params) { // build a color map as your need. 
+//						var colorList = ['#C1232B', '#B5C334', '#FCCE10', '#E87C25', '#27727B', '#FE8463', '#9BCA63', '#FAD860', '#F3A43B', '#60C0DD', '#D7504B', '#C6E579', '#F4E001', '#F0805A', '#26C0C0'];
+//						return colorList[params.dataIndex]
+//					},
+					label: {
+						show: true,
+						position: 'top',
+						formatter: '{b}\n{c}'
+					}
+				}
+			},
+			data: [null, 21, ],
+			markPoint: {
+				tooltip: {
+					trigger: 'item',
+					backgroundColor: 'rgba(0,0,0,0)'
+				},
+				data: [{
+					xAxis: 0,
+					y: 350,
+					name: 'Line',
+					symbolSize: 20,
+					symbol: 'none'
+				}, {
+					xAxis: 1,
+					y: 350,
+					name: 'Bar',
+					symbolSize: 20,
+					symbol: 'none'
+				}, {
+					xAxis: 2,
+					y: 350,
+					name: 'Scatter',
+					symbolSize: 20,
+					symbol: 'none'
+				}]
+			}
+		}, {
+			name: '教育贷',
+			type: 'bar',
+			barWidth: 40,
+			itemStyle: {
+				normal: {
+//					color: function(params) { // build a color map as your need. 
+//						var colorList = ['#C1232B', '#B5C334', '#FCCE10', '#E87C25', '#27727B', '#FE8463', '#9BCA63', '#FAD860', '#F3A43B', '#60C0DD', '#D7504B', '#C6E579', '#F4E001', '#F0805A', '#26C0C0'];
+//						return colorList[params.dataIndex]
+//					},
+					label: {
+						show: true,
+						position: 'top',
+						formatter: '{b}\n{c}'
+					}
+				}
+			},
+			data: [null, null, 10],
+			markPoint: {
+				tooltip: {
+					trigger: 'item',
+					backgroundColor: 'rgba(0,0,0,0)'
+				},
+				data: [{
+					xAxis: 0,
+					y: 350,
+					name: 'Line',
+					symbolSize: 20,
+					symbol: 'none'
+				}, {
+					xAxis: 1,
+					y: 350,
+					name: 'Bar',
+					symbolSize: 20,
+					symbol: 'none'
+				}, {
+					xAxis: 2,
+					y: 350,
+					name: 'Scatter',
+					symbolSize: 20,
+					symbol: 'none'
+				}]
+			}
+		}]
+	};
+	myChart.setOption(option);
+</script>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<title>测试</title>
+		<style type="text/css">
+			form{
+				margin-bottom:20px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--<form action="http://127.0.0.1:3010/process_get" method="get">
+			FirstName:<input type="text" name="first_name"/>
+			LastName:<input type="text" name="last_name"/>
+			<input type="submit" value="submit"/>
+		</form>-->
+		<!--<form action="http://127.0.0.1:3010/process_post" method="post">
+			FirstName:<input type="text" name="first_name"/><br/>
+			LastName :<input type="text" name="last_name"/>
+			<input type="submit" value="submit" class="submit"/>
+		</form>-->
+		<form action="/file_upload" method="post" enctype="multipart/form-data">
+			<input type="file" size="50" name="img"/><br />
+			<input type="file" size="50" name="img"/><br />
+			<input type="file" size="50" name="img"/><br />
+			<input type="file" size="50" name="img"/><br />
+			<input type="submit" value="上传" class="submit"/>
+		</form>
+		
+	</body>
+</html>
+<script>
+	$(function(){
+		$(".submit").click(function(){
+//			return false;
+		})
+	})
+</script>
